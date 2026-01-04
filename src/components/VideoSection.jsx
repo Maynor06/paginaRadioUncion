@@ -22,6 +22,10 @@ const VideoSection = () => {
     const videoTitle = data.snippet.title;
     const isLive = data.isLive;
 
+    const videoSrc = isLive
+        ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`
+        : `https://www.youtube.com/embed/${videoId}`;
+
     return (
         <div className="w-full max-w-4xl mx-auto px-4">
             {/* Video Container */}
@@ -29,7 +33,7 @@ const VideoSection = () => {
                 {videoId && (
                     <iframe
                         className="absolute top-0 left-0 w-full h-full"
-                        src={`https://www.youtube.com/embed/${videoId}`}
+                        src={videoSrc}
                         title="Radio Unción Video"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -47,7 +51,6 @@ const VideoSection = () => {
             </div>
 
             {/* Social Icons */}
-            <p className="text-center text-gray-600 font-medium mb-4">siguenos en:</p>
             <div className="flex justify-center gap-8 mt-6">
                 <a href="https://www.facebook.com/search/top?q=radio%20y%20tv%20unci%C3%B3n" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition-transform hover:scale-110">
                     <FaFacebook size={40} />
