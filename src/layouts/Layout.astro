@@ -1,22 +1,43 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { ClientRouter } from "astro:transitions";
+
+const { title } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
+		<ClientRouter />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/logoRadio.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		<!-- Google Fonts: Inter -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
-	<body>
-		<slot />
+	<body class="bg-gray-50 text-gray-900 font-sans flex flex-col min-h-screen">
+		<Navbar />
+		<div class="flex-grow">
+			<slot />
+		</div>
+		<Footer />
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	:root {
+		--font-sans: "Inter", sans-serif;
+	}
 	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+		font-family: var(--font-sans);
 	}
 </style>

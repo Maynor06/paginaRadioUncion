@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* Custom Global Styles */
+@layer components {
+    .container {
+        @apply max-w-7xl;
+    }
+}

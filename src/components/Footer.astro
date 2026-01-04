@@ -1,0 +1,75 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-gray-900 text-white py-8 mt-auto">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Info -->
+            <div>
+                <img
+                    src="/logoRadio2.jpg"
+                    alt="Radio Unción"
+                    class="h-20 w-auto mb-4 rounded-lg object-contain bg-white p-1"
+                />
+                <h3 class="text-xl font-bold mb-4">Radio Unción 95.9 FM</h3>
+                <p class="text-gray-400">
+                    La voz Católica. Al servicio de la iglesia.
+                </p>
+                <div class="mt-4">
+                    <p class="text-gray-400">
+                        Escúchanos en vivo las 24 horas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Enlaces Rápidos</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a
+                            href="/blog"
+                            class="text-gray-400 hover:text-white transition-colors"
+                            >Noticias</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/donaciones"
+                            class="text-gray-400 hover:text-white transition-colors"
+                            >Donaciones</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/acerca"
+                            class="text-gray-400 hover:text-white transition-colors"
+                            >Sobre Nosotros</a
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Contacto</h3>
+                <p class="text-gray-400 text-sm">
+                    Dirección: [Insertar Dirección Aquí]
+                </p>
+                <p class="text-gray-400 text-sm mt-1">
+                    Email: contacto@radiouncion.com
+                </p>
+                <p class="text-gray-400 text-sm mt-1">
+                    Teléfono: +123 456 7890
+                </p>
+            </div>
+        </div>
+
+        <div
+            class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500"
+        >
+            &copy; {currentYear} Radio Unción. Todos los derechos reservados.
+        </div>
+    </div>
+</footer>

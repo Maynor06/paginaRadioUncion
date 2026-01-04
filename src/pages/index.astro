@@ -1,11 +1,186 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import RadioPlayer from "../components/RadioPlayer";
+import VideoSection from "../components/VideoSection";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Hero Background Image (can be replaced)
+const heroBg =
+	"https://images.unsplash.com/photo-1478737270239-2f63b8608d8b?q=80&w=2070&auto=format&fit=crop";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Radio Unción 95.9 FM - La Voz Católica">
+	<!-- Hero Section with Radio Player -->
+	<section
+		class="relative min-h-[600px] flex items-center justify-center text-white overflow-hidden"
+	>
+		<!-- Background Image with Overlay -->
+		<div class="absolute inset-0 z-0">
+			<img
+				src={heroBg}
+				alt="Estudio de Radio"
+				class="w-full h-full object-cover"
+			/>
+			<div
+				class="absolute inset-0 bg-gradient-to-b from-sky-900/80 to-black/60"
+			>
+			</div>
+		</div>
+
+		<div
+			class="container mx-auto px-4 z-10 relative grid md:grid-cols-2 gap-12 items-center"
+		>
+			<!-- Text Content -->
+			<div class="text-center md:text-left space-y-6">
+				<h1 class="text-4xl md:text-6xl font-bold leading-tight">
+					Evangelizando a través de las ondas
+				</h1>
+				<p
+					class="text-lg md:text-xl text-gray-200 max-w-lg mx-auto md:mx-0"
+				>
+					Escucha la palabra de Dios, música católica y la Santa Misa
+					donde quieras que estés.
+				</p>
+				<div
+					class="flex flex-wrap gap-4 justify-center md:justify-start"
+				>
+					<a
+						href="/donaciones"
+						class="bg-sky-500 hover:bg-sky-600 text-white px-8 py-3 rounded-full font-bold transition-transform hover:scale-105"
+					>
+						Hacer una Donación
+					</a>
+					<a
+						href="/blog"
+						class="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-8 py-3 rounded-full font-bold transition-all"
+					>
+						Ver Noticias
+					</a>
+				</div>
+			</div>
+
+			<!-- Radio Player Widget (Floating/Featured) -->
+			<div class="flex justify-center md:justify-end">
+				<RadioPlayer client:load />
+			</div>
+		</div>
+	</section>
+
+	<!-- Video Section -->
+	<section class="py-16 bg-white">
+		<div class="container mx-auto px-4 text-center">
+			<h2 class="text-3xl font-bold text-gray-800 mb-8">
+				Transmisión en Vivo
+			</h2>
+			<VideoSection client:visible transition:persist />
+		</div>
+	</section>
+
+	<!-- Call to Action / Info -->
+	<section class="py-16 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<div class="grid md:grid-cols-3 gap-8">
+				<!-- Feature 1 -->
+				<div
+					class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center"
+				>
+					<div
+						class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-6 text-sky-600"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-8 h-8"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+							></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3">Blog y Noticias</h3>
+					<p class="text-gray-600 mb-4">
+						Mantente informado con las últimas noticias de la
+						iglesia y nuestra comunidad.
+					</p>
+					<a
+						href="/blog"
+						class="text-sky-600 font-semibold hover:underline"
+						>Leer más &rarr;</a
+					>
+				</div>
+
+				<!-- Feature 2 -->
+				<div
+					class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center"
+				>
+					<div
+						class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-6 text-sky-600"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-8 h-8"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+							></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3">Donaciones</h3>
+					<p class="text-gray-600 mb-4">
+						Tu aporte nos ayuda a seguir transmitiendo el mensaje de
+						esperanza.
+					</p>
+					<a
+						href="/donaciones"
+						class="text-sky-600 font-semibold hover:underline"
+						>Apoyar ahora &rarr;</a
+					>
+				</div>
+
+				<!-- Feature 3 -->
+				<div
+					class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center"
+				>
+					<div
+						class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-6 text-sky-600"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-8 h-8"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+							></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-3">Quiénes Somos</h3>
+					<p class="text-gray-600 mb-4">
+						Conoce nuestra historia, misión y el equipo detrás de
+						los micrófonos.
+					</p>
+					<a
+						href="/acerca"
+						class="text-sky-600 font-semibold hover:underline"
+						>Ver más &rarr;</a
+					>
+				</div>
+			</div>
+		</div>
+	</section>
 </Layout>
