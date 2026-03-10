@@ -7,7 +7,7 @@ const RadioPlayer = () => {
   const [isLive, setIsLive] = useState(true); // Assuming always live for now
   const audioRef = useRef(null);
 
-  const STREAM_URL = "http://streamtotal.net:9313/stream"; // Reemplázalo por tu enlace de stream correcto
+  const STREAM_URL = "https://streamtotal.net/proxy/radiouncion/stream"; // Reemplázalo por tu enlace de stream correcto
 
   const togglePlay = async () => {
     if (!audioRef.current) return;
