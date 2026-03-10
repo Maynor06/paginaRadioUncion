@@ -10,7 +10,7 @@ const RadioPlayer = () => {
   // Using a generic reliable stream for testing or the actual one if known.
   // I will use a placeholder or try to find one. For now, empty or example.
   // Many radios use shoutcast/icecast.
-  const STREAM_URL = "https://stream.zeno.fm/ezw4k3v70w8uv"; // Example stream, replace with actual
+  const STREAM_URL = "http://streamtotal.net:9313/stream"; // Example stream, replace with actual
 
   const togglePlay = () => {
     if (audioRef.current) {
