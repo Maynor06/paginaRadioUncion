@@ -2,24 +2,42 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const RadioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const [isLive, setIsLive] = useState(true); // Assuming always live for now
   const audioRef = useRef(null);
 
-  // Placeholder stream URL - User needs to provide actual stream
-  // Using a generic reliable stream for testing or the actual one if known.
-  // I will use a placeholder or try to find one. For now, empty or example.
-  // Many radios use shoutcast/icecast.
-  const STREAM_URL = "http://streamtotal.net:9313/stream"; // Example stream, replace with actual
+  const STREAM_URL = "http://streamtotal.net:9313/stream"; // Reemplázalo por tu enlace de stream correcto
 
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
+  const togglePlay = async () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      // Limpiamos el src para evitar que el audio se siga descargando en segundo plano 
+      // y para que al volver a darle play, esté sincronizado "en vivo" y no atrasado.
+      audioRef.current.src = "";
+      audioRef.current.load();
+      setIsPlaying(false);
+      setIsLoading(false);
+    } else {
+      try {
+        setIsLoading(true);
+        // Volvemos a asignar la URL del stream
+        audioRef.current.src = STREAM_URL;
+        audioRef.current.load();
+
+        // El método play() devuelve una Promesa
+        await audioRef.current.play();
+        setIsPlaying(true);
+      } catch (error) {
+        console.error("Error al reproducir el stream:", error);
+        if (error.name !== "AbortError") {
+          setIsPlaying(false);
+        }
+      } finally {
+        setIsLoading(false);
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -56,12 +74,21 @@ const RadioPlayer = () => {
         {/* Play/Pause Button */}
         <button
           onClick={togglePlay}
-          className={`w-full py-4 rounded-xl flex items-center justify-center gap-3 transition-all transform hover:scale-105 ${isPlaying
+          disabled={isLoading}
+          className={`w-full py-4 rounded-xl flex items-center justify-center gap-3 transition-all transform ${isLoading ? 'opacity-80 cursor-wait' : 'hover:scale-105'} ${isPlaying
             ? 'bg-red-500 hover:bg-red-600 text-white shadow-red-200'
             : 'bg-sky-600 hover:bg-sky-700 text-white shadow-sky-200'
             } shadow-lg font-bold text-lg`}
         >
-          {isPlaying ? (
+          {isLoading ? (
+            <>
+              <svg className="animate-spin -ml-1 mr-3 w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Cargando...
+            </>
+          ) : isPlaying ? (
             <>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
