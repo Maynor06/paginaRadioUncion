@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 const { title } = Astro.props;
 ---
@@ -28,6 +29,7 @@ const { title } = Astro.props;
 		<Navbar />
 		<div class="flex-grow">
 			<slot />
+			<SpeedInsights />
 		</div>
 		<Footer />
 	</body>
