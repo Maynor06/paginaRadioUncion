@@ -6,16 +6,39 @@ import { FaFacebook, FaTiktok, FaYoutube } from 'react-icons/fa';
 const fetcher = url => axios.get(url).then(res => res.data);
 
 const VideoSection = () => {
-
-    const { data, error } = useSWR('/api/get-video', fetcher);
-
+    // Optimización de la llamada API: SWR ya es rápido, pero añadimos opciones para 
+    // evitar peticiones innecesarias cuando el usuario cambie de pestaña y vuelva.
+    const { data, error } = useSWR('/api/get-video', fetcher, {
+        revalidateOnFocus: false, // No recargar si el usuario solo cambia de pestaña
+        dedupingInterval: 60000,  // Reutilizar la respuesta durante al menos 1 minuto
+    });
 
     if (!data && !error) {
-        return <div className="text-center py-10">Cargando video...</div>;
+        // SKELETON: Mantiene la misma estructura y espacios para evitar que el diseño salte
+        return (
+            <div className="w-full max-w-4xl mx-auto px-4">
+                {/* Video Container Skeleton */}
+                <div className="relative pt-[56.25%] rounded-2xl overflow-hidden shadow-2xl bg-gray-200 animate-pulse mb-6"></div>
+
+                {/* Title and Info Skeleton */}
+                <div className="text-center mb-8 flex flex-col items-center">
+                    <div className="h-8 bg-gray-200 rounded-lg w-48 mb-3 animate-pulse"></div>
+                    <div className="h-6 bg-gray-200 rounded-lg w-3/4 max-w-md mb-4 animate-pulse"></div>
+                    <div className="h-5 bg-gray-100 rounded-lg w-64 animate-pulse"></div>
+                </div>
+
+                {/* Social Icons Skeleton */}
+                <div className="flex justify-center gap-8 mt-6">
+                    <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+                    <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+                    <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+                </div>
+            </div>
+        );
     }
 
     if (error) {
-        return <div className="text-center py-10">Video no disponible</div>;
+        return <div className="text-center py-10 font-medium text-gray-500">Video no disponible por el momento.</div>;
     }
 
     const videoId = data.id.videoId;
@@ -27,7 +50,7 @@ const VideoSection = () => {
         : `https://www.youtube.com/embed/${videoId}`;
 
     return (
-        <div className="w-full max-w-4xl mx-auto px-4">
+        <div className="w-full max-w-4xl mx-auto px-4 min-h-[500px]">
             {/* Video Container */}
             <div className="relative pt-[56.25%] rounded-2xl overflow-hidden shadow-2xl bg-black mb-6">
                 {videoId && (
@@ -46,8 +69,8 @@ const VideoSection = () => {
                 <h3 className="text-2xl font-bold text-gray-800 mb-2">
                     {isLive ? "🔴 EN VIVO AHORA" : "Última Transmisión"}
                 </h3>
-                <p className="text-lg text-gray-700 font-medium mb-4">{videoTitle}</p>
-                <p className="text-gray-600">Sigue la Santa Misa y nuestros programas.</p>
+                <p className="text-lg text-gray-700 font-medium mb-2 leading-relaxed">{videoTitle}</p>
+                <p className="text-gray-500 text-sm">Sigue la Santa Misa y nuestros programas.</p>
             </div>
 
             {/* Social Icons */}

@@ -1,0 +1,135 @@
+---
+const directories = [
+    {
+        name: "Online Radio Box",
+        search: "Radio Uncion La Voz Católica",
+        image: "/RadioBox.webp",
+        ios: "https://apps.apple.com/es/app/online-radio-box/id1101437391",
+        android:
+            "https://play.google.com/store/apps/details?id=com.finallevel.radiobox&hl=es_GT",
+    },
+    {
+        name: "Simple Radio",
+        search: "Radio Unción La Voz Católica",
+        image: "/SimpleRadio.webp",
+        ios: "https://apps.apple.com/es/app/simple-radio-fm-am-en-vivo/id891132290",
+        android:
+            "https://play.google.com/store/apps/details?id=com.streema.simpleradio&hl=es_GT",
+    },
+    {
+        name: "myTuner Radio",
+        search: "Radio Unción",
+        image: "/MyTuner.webp",
+        ios: "https://apps.apple.com/us/app/mytuner-radio-live-stations/id520502858",
+        android:
+            "https://play.google.com/store/apps/details?id=com.appgeneration.itunerfree",
+    },
+    {
+        name: "TuneIn Radio",
+        search: "Radio Unción La Voz Católica",
+        image: "/TuneIn.webp",
+        ios: "https://apps.apple.com/us/app/tunein-radio-music-sports/id418987775",
+        android:
+            "https://play.google.com/store/apps/details?id=tunein.player&hl=es_GT",
+    },
+    {
+        name: "Radio Guatemala FM",
+        search: "Radio Unción",
+        image: "/radioGuateFM.webp",
+        ios: null,
+        android:
+            "https://play.google.com/store/apps/details?id=com.appmind.radios.gt&hl=es_HN&pli=1",
+    },
+    {
+        name: "Radio Guatemala",
+        search: "Radio Unción",
+        image: "/RadioGuatemla.webp",
+        ios: "https://apps.apple.com/mx/app/radio-guatemala/id924793333",
+        android:
+            "https://play.google.com/store/apps/details?id=com.useronestudio.radioguatemala",
+    },
+];
+
+const storePlay = "/google-play.webp";
+
+const storeApp = "/app-store.webp";
+---
+
+<section class="py-4 bg-white border-t border-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800">
+                Escúchanos en tu Móvil
+            </h2>
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                Lleva nuestra señal a donde vayas. Descarga alguna de estas
+                aplicaciones, búscanos y sintonízanos desde tu dispositivo
+                favorito.
+            </p>
+        </div>
+
+        <div
+            class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-8 max-w-6xl mx-auto"
+        >
+            {
+                directories.map((app) => (
+                    <div class="bg-gray-50 rounded-2xl p-3 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col items-center text-center sm:h-fit">
+                        <div class="h-16 sm:h-32 flex items-center justify-center mb-3 sm:mb-6">
+                            <img
+                                src={app.image}
+                                alt={`Logo ${app.name}`}
+                                class="max-h-full max-w-full object-contain bg-white rounded-xl sm:rounded-2xl shadow-sm p-1.5 sm:p-2"
+                            />
+                        </div>
+
+                        <h3 class="text-sm sm:text-xl font-bold text-gray-800 mb-2 sm:mb-4 line-clamp-2 min-h-[40px] sm:min-h-0 flex items-center">
+                            {app.name}
+                        </h3>
+
+                        <div class="bg-sky-100 text-sky-800 text-xs sm:text-sm py-2 px-2 sm:py-3 sm:px-4 rounded-xl mb-4 sm:mb-8 w-full border border-sky-200">
+                            <span class="block text-[10px] sm:text-xs text-sky-600 mb-0.5 sm:mb-1 uppercase font-bold tracking-wider">
+                                Búscanos como:
+                            </span>
+                            <span class="font-medium leading-tight">
+                                "{app.search}"
+                            </span>
+                        </div>
+
+                        <div class="mt-0 h-fit flex flex-row gap-2 sm:gap-4 w-full justify-center items-center">
+                            {app.ios && (
+                                <a
+                                    href={app.ios}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hover:scale-105 transition-transform"
+                                    title={`Descargar ${app.name} en App Store`}
+                                >
+                                    <img
+                                        src={storeApp}
+                                        alt="Descargar en App Store"
+                                        class="h-8 sm:h-12 w-auto drop-shadow-sm"
+                                    />
+                                </a>
+                            )}
+                            {app.android && (
+                                <a
+                                    href={app.android}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hover:scale-105 transition-transform"
+                                    title={`Descargar ${app.name} en Google Play`}
+                                >
+                                    <img
+                                        src={storePlay}
+                                        alt="Descargar en Google Play"
+                                        class="h-8 sm:h-12 w-auto drop-shadow-sm"
+                                    />
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
