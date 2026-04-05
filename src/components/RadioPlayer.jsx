@@ -23,6 +23,16 @@ const RadioPlayer = () => {
     } else {
       try {
         setIsLoading(true);
+
+        // --- INICIO EVENTO ANALYTICS ---
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'play_radio', {
+            'event_category': 'Streaming',
+            'event_label': 'Radio Unción En Vivo',
+            'value': 1
+          });
+        }
+
         // Volvemos a asignar la URL del stream
         audioRef.current.src = STREAM_URL;
         audioRef.current.load();

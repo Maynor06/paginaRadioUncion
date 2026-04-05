@@ -6,19 +6,15 @@
 </script>
 
 <script is:inline data-astro-rerun>
-  // Definimos la interfaz localmente para que no marque error
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     window.dataLayer.push(arguments);
   }
 
   gtag('js', new Date());
-  // Importante: Tu ID real
-  gtag('config', 'G-WJMSS80Q1N', {
-    'debug_mode': true // Esto fuerza a que aparezca en el DebugView
-  });
+  gtag('config', 'G-WJMSS80Q1N');
 
-  // Soporte para ClientRouter (Navegación de Astro)
+  // Mantén esto para que funcione la navegación entre páginas de la radio
   document.addEventListener('astro:page-load', () => {
     gtag('config', 'G-WJMSS80Q1N', {
       'page_path': window.location.pathname
