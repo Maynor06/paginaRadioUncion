@@ -1,14 +1,27 @@
 ---
 ---
 <script 
-  type="text/partytown" 
+  is:inline 
   src="https://www.googletagmanager.com/gtag/js?id=G-WJMSS80Q1N">
 </script>
-<script type="text/partytown">
+
+<script is:inline data-astro-rerun>
+  // Definimos la interfaz localmente para que no marque error
   window.dataLayer = window.dataLayer || [];
   function gtag() {
-    dataLayer.push(arguments);
+    window.dataLayer.push(arguments);
   }
+
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  // Importante: Tu ID real
+  gtag('config', 'G-WJMSS80Q1N', {
+    'debug_mode': true // Esto fuerza a que aparezca en el DebugView
+  });
+
+  // Soporte para ClientRouter (Navegación de Astro)
+  document.addEventListener('astro:page-load', () => {
+    gtag('config', 'G-WJMSS80Q1N', {
+      'page_path': window.location.pathname
+    });
+  });
 </script>
